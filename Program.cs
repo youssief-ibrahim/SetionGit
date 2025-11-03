@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using SetionGit.Data;
+
 namespace SetionGit
 {
     public class Program
@@ -12,6 +15,9 @@ namespace SetionGit
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            var connect = builder.Configuration.GetConnectionString("defultconnection");
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+             options.UseSqlServer(connect));
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
